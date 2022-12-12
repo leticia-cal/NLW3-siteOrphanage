@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adicionar um orfanato | Happy</title>
+
+    <!--CSS Leaflet Map-->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+
+    <!--Icone que fica no head-->
+    <link rel="icon" href="/images/logo-icon.png" />
+
+    <!--Fontes do google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Css customizado-->
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <!--Css animações-->
+    <link rel="stylesheet" href="/css/animations.css" />
+
+    <!--Css sidebar-->
+    <link rel="stylesheet" href="/css/sidebar.css" />
+
+    <!--Css mapa-->
+    <link rel="stylesheet" href="/css/map.css" />
+
+    <!--Css forms-->
+    <link rel="stylesheet" href="/css/forms.css" />
+
+    <!--Css buttons-->
+    <link rel="stylesheet" href="/css/buttons.css" />
+
+    <!--Css orphanages-->
+    <link rel="stylesheet" href="/css/page-create-orphanage.css" />
+  </head>
+  <body>
+    <div id="page-create-orphanage">
+      <!--Começo create orphanage-->
+
+      <aside class="animate-right sidebar"><!--Começo barra lateral-->
+        <img src="/images/map-marker.svg" alt="Logo Happy">
+        <footer>
+          <button onclick="history.back()">
+            <img src="/images/arrow-back.svg" alt="Voltar">
+          </button>
+        </footer>
+      </aside>
+      <!--Fim barra lateral-->
+
+      <main class="animate-appear with-sidebar">
+        <form action="save-orphanage" method="post" onsubmit="validate(event)">
+          <fieldset> <!--Começo Dados-->
+            <legend>Dados</legend>
+
+            <div class="map-container"> <!--Começo map-container-->
+              <div id="map"></div>
+
+              <input type="hidden" name="lat">
+              <input type="hidden" name="lng">
+
+              <footer>
+                <a href="#" id="select-point">
+                  Clique no mapa para adicionar a localização
+                </a>
+              </footer>
+            </div> <!--Fim map-container-->
+
+            <div class="input-block">
+              <label for="name">Nome</label>
+              <input type="text" id="name" name="name" required> <!--name só será usado no backend-->
+            </div>
+
+            <div class="input-block">
+              <label for="about">Sobre<span>Máximo de 300 caracteres</span></label>
+              <textarea name="about" id="about" required></textarea>
+            </div>
+
+            <div class="input-block">
+              <label for="whatsapp">Número de Whatsapp</label>
+              <input type="text" id="whatsapp" name="whatsapp" required> <!--name só será usado no backend-->
+            </div>
+
+            <div class="input-block images"> <!--Começo input-block-->
+              <label for="images">Foto</label>
+              <div class="images-upload" id="images"> <!--Começo images-upload-->
+
+                <div class="new-upload"> <!--Começo new-upload-->
+                  <input type="text" name="images" placeholder="Cole o link da foto aqui" required type="url">
+                  <span onclick="deletePhotoField(event)">
+                    <img src="/images/remove-file.svg" alt="Remover imagem">
+                  </span>
+                </div><!--Fim new-upload-->
+
+              </div> <!--Fim images-upload-->
+
+              <button onclick="addPhotoField()" type="button">
+                <img src="/images/add-file.svg" alt="Nova imagem">
+              </button>
+            </div> <!--Fim input-block-->
+          </fieldset> <!--Fim Dados-->
+
+          <fieldset> <!--Começo Visitação-->
+            <legend>Visitação</legend>
+
+            <div class="input-block">
+              <label for="instructions">Instruções</label>
+              <textarea name="instructions" id="instructions" required></textarea>
+            </div>
+
+            <div class="input-block">
+              <label for="opening_hours">Horário das visitas</label>
+              <input type="text" id="opening_hours" name="opening_hours" required> <!--name só será usado no backend-->
+            </div>
+
+            <div class="input-block"> <!--Começo input-block-->
+              <label for="open_on_weekends">Atende fim de semana?</label>
+              <input type="hidden" name="open_on_weekends" id="open_on_weekends" value="1" required> <!--1 = true-->
+              <div class="button-select"> <!--Começo button-select-->
+                <button
+                onclick="toggleActive(event)"
+                type="button"
+                class="active"
+                data-value="1"
+                >Sim</button>
+
+                <button
+                onclick="toggleActive(event)"
+                type="button"
+                data-value="0"
+                >Não</button>
+              </div> <!--Fim button-select-->
+
+              <button type="submit" class="primary-button">Confirmar</button>
+            </div> <!--Fim input-block-->
+
+          </fieldset> <!--Fim Visitação-->
+        </form>
+      </main>
+    </div>
+    <!--Fim create orphanage-->
+
+    <script src="/scripts/page-create-orphanage.js"></script>
+  </body>
+</html>

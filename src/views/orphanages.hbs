@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Localize um orfanato | Happy</title>
+
+    <!--CSS Leaflet Map-->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+
+    <!--Icone que fica no head-->
+    <link rel="icon" href="/images/logo-icon.png" />
+
+    <!--Fontes do google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Css customizado-->
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <!--Css animações-->
+    <link rel="stylesheet" href="/css/animations.css" />
+
+    <!--Css orphanages-->
+    <link rel="stylesheet" href="/css/page-orphanages.css" />  
+
+  </head>
+  <body>
+    <div id="page-orphanages"> <!--Começo page orphanages-->
+      
+
+      <aside class="animate-right"><!--Começo barra lateral-->
+        
+        <header>
+          <img src="/images/map-marker.svg" alt="Logo da Happy" />
+          <h2>Escolha um orfanato no mapa</h2>
+          <p>Muitas crianças estão esperando a sua visita :)</p>
+        </header>
+
+        <footer>
+          <strong>Rio do Sul</strong>
+          <p>Santa Catarina</p>
+        </footer>
+      </aside> <!--Fim barra lateral-->
+      
+
+      <div id="map" class="animate-appear"><!--Começo map--></div><!--Fim map-->
+
+      <div class="orphanages"> <!--Começo orphanages-->
+        {{#each orphanages}}
+        
+        <span hidden
+          data-id="{{this.id}}"
+          data-name="{{this.name}}"
+          data-lat="{{this.lat}}"
+          data-lng="{{this.lng}}"
+          >
+        </span>
+        
+        {{/each}}
+      </div> <!--Fim orphanages-->
+      
+      
+
+      <a
+        href="/create-orphanage"
+        class="create-orphanage"
+        title="Cadastre um orfanato"
+      >
+        <img src="/images/plus.svg" alt="Criar orfanato" />
+      </a>
+    </div> <!--Fim page orphanages-->
+
+    <script src="/scripts/page-orphanages.js"></script>
+    
+  </body>
+</html>
